@@ -1,0 +1,229 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".DetailActivity" >
+
+    <TextView
+        android:id="@+id/city_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/city"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/city_l"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/state_name_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/city_l"
+        android:layout_marginTop="@dimen/activity_detail_separation"
+        android:text="@string/state_name"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/state_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/state_name_l"
+        android:layout_alignRight="@+id/city"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/latitude_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/state_name_l"
+        android:layout_marginTop="@dimen/activity_detail_separation"
+        android:text="@string/latitude"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/latitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/latitude_l"
+        android:layout_alignRight="@+id/city"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/longitude_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/latitude_l"
+        android:layout_marginTop="@dimen/activity_detail_separation"
+        android:text="@string/longitude"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/longitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/longitude_l"
+        android:layout_alignRight="@+id/city"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/local_tz_long_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/longitude_l"
+        android:layout_marginTop="@dimen/activity_detail_separation"
+        android:text="@string/local_tz_long"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/local_tz_long"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/city"
+        android:layout_alignBottom="@+id/local_tz_long_l"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/weather_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/local_tz_long_l"
+        android:layout_marginTop="@dimen/activity_detail_separation"
+        android:text="@string/weather"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/city"
+        android:layout_alignBottom="@+id/weather_l"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/temp_c_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/weather_l"
+        android:layout_marginTop="@dimen/activity_detail_separation"
+        android:text="@string/temp_c"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/temp_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/city"
+        android:layout_alignBottom="@+id/temp_c_l"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/relative_humidity_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/temp_c_l"
+        android:layout_marginTop="@dimen/activity_detail_separation"
+        android:text="@string/relative_humidity"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/relative_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/city"
+        android:layout_alignBottom="@+id/relative_humidity_l"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/dewpoint_c_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/relative_humidity_l"
+        android:layout_marginTop="@dimen/activity_detail_separation"
+        android:text="@string/dewpoint_c"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/dewpoint_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/city"
+        android:layout_alignBottom="@+id/dewpoint_c_l"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/heat_index_c_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/dewpoint_c_l"
+        android:layout_marginTop="@dimen/activity_detail_separation"
+        android:text="@string/heat_index_c"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/heat_index_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/city"
+        android:layout_alignBottom="@+id/heat_index_c_l"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/feelslike_c_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/heat_index_c_l"
+        android:layout_marginTop="@dimen/activity_detail_separation"
+        android:text="@string/feelslike_c"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/feelslike_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/city"
+        android:layout_alignBottom="@+id/feelslike_c_l"
+        android:textColor="@color/baufest_red"
+        android:textSize="16sp" />
+
+</RelativeLayout>

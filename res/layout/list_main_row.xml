@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rowBonusLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="93.33dp"
+    android:background="@drawable/list_selector"
+    android:orientation="horizontal"
+    android:padding="10.00dp" >
+
+    <TextView
+        android:id="@+id/titleRowMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="20sp" 
+        android:text="Rosario, Argentina"/>
+
+    <TextView
+        android:id="@+id/temperatureRowMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:singleLine="true"
+        android:textColor="@color/baufest_red"
+        android:textSize="26sp" 
+        android:text="31.7 °C" />
+
+    <TextView
+        android:id="@+id/temperatureHighLow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/temperatureRowMain"
+        android:layout_below="@+id/temperatureRowMain"
+        android:singleLine="true"
+        android:textColor="@color/baufest_red"
+        android:textSize="17sp" 
+        android:text="2 °C / NA °C" />
+
+</RelativeLayout>

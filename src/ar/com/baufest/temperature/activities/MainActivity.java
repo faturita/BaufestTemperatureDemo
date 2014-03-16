@@ -1,81 +1,106 @@
 package ar.com.baufest.temperature.activities;
 
+import static ar.com.baufest.temperature.application.BaufestTemperatureApplication.getModel;
+import static ar.com.baufest.temperature.application.Constants.CITIES;
+import static ar.com.baufest.temperature.application.Constants.CONDITIONS_URL;
+import static ar.com.baufest.temperature.application.Constants.ERROR;
+import static ar.com.baufest.temperature.application.Constants.OK;
+import static ar.com.baufest.temperature.ws.RestWebService.callRestfulWebService;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import android.app.ListActivity;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
+import ar.com.baufest.temperature.R;
+import ar.com.baufest.temperature.adapters.MainAdapter;
 import ar.com.baufest.temperature.entities.GeneralResponse;
-import ar.com.baufest.temperature.ws.RestWebService;
+import ar.com.baufest.temperature.entities.MainItem;
 
 import com.google.gson.Gson;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends BaseActivity {
+	private ProgressDialog progressBar = null;
+	private ListView lstMainItems = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		/*String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-				"Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-				"Linux", "OS/2" };
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, values);
-		setListAdapter(adapter);*/
+		setContentView(R.layout.activity_main);
 		
+		handleControls();
+		initView();
+	}
+
+	@Override
+	protected final void handleControls() {
+		progressBar = new ProgressDialog(this);
+		progressBar.setTitle(getString(R.string.title_activity_main_spinner));
+		
+		lstMainItems = (ListView) findViewById(R.id.lstMainItems);
+	}
+
+	@Override
+	protected final void initView() {
 		new ConditionsService().execute();
 	}
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		String item = (String) getListAdapter().getItem(position);
-		Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+	private void populateTemperatureList() {
+		final MainAdapter adapter = new MainAdapter(this, getModel().getMainItems(), this);
+		lstMainItems.setAdapter(adapter);		
 	}
 
-	public void handleControls() {
-		// TODO Auto-generated method stub
-
+	public void btnDashboardClick(MainItem item) {
+		getModel().setCurrentMainItem(item);
+		startActivity(new Intent(this, DetailActivity.class));
 	}
 
-	public void initScreen() {
-		// TODO Auto-generated method stub
-	}
-}
+	class ConditionsService extends AsyncTask<String, Integer, String> {
 
-class ConditionsService extends AsyncTask<String, Integer, String> {
+		@Override
+		protected void onPreExecute() {
+			progressBar.cancel();
+			progressBar.show();
+		}
 
-	@Override
-	protected void onPreExecute() {
-
-	}
-
-	@Override
-	protected String doInBackground(String... params) {
-		final List<String> cities = Arrays.asList("Ushuaia");//, "Jujuy", "Cordoba", "Bariloche", "Rosario"); 			
-		final String url = "http://api.wunderground.com/api/ee5751081ea2386e/conditions/q/Argentina/%s.json";
-		final List<GeneralResponse> responses = new ArrayList<GeneralResponse>();
-		final Gson gson = new Gson();		
-		
-		for (final String city : cities) {
+		@Override
+		protected String doInBackground(String... params) {
+			final Gson gson = new Gson();
 			String jsonResponse = null;
-			try {
-				jsonResponse = RestWebService.callRestfulWebService(String.format(url, city));
-				final GeneralResponse generalResponse = gson.fromJson(jsonResponse, GeneralResponse.class);
-				responses.add(generalResponse);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			String result = OK;
+			final List<MainItem> responses = new ArrayList<MainItem>();
+
+			for (final String city : CITIES) {
+				try {
+					jsonResponse = callRestfulWebService(String.format(
+							CONDITIONS_URL, city));
+					final GeneralResponse generalResponse = gson.fromJson(
+							jsonResponse, GeneralResponse.class);
+					responses.add(new MainItem(generalResponse));
+				} catch (Exception e) {
+					result = ERROR;
+					e.printStackTrace();
+				}
+			}
+			getModel().setMainItems(responses);
+			
+			return result;
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			progressBar.cancel();
+			if (result.equals(OK)) {
+				populateTemperatureList();
+			} else {
+				Toast.makeText(getApplicationContext(),
+						R.string.activity_main_error_mesagge, Toast.LENGTH_LONG)
+						.show();
 			}
 		}
-		return null;
 	}
-
-	@Override
-	protected void onPostExecute(String result) {
-
-	}
-
 }

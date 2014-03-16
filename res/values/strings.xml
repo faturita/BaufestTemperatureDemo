@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BaufestTemperature</string>
+    <string name="app_name">Temperaturas</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_main_spinner">Cargando temperaturas</string>
+    <string name="activity_main_error_mesagge">Se produjo un error al cargar las temperaturas</string>
+    <string name="title_activity_detail">Detalle</string>
+    <string name="city">Ciudad</string>
+    <string name="state_name">Estado</string>
+    <string name="latitude">Latitud</string>
+    <string name="longitude">Longitud</string>
+    <string name="observation_time">Última observación</string>
+    <string name="local_tz_long">Franja horaria</string>
+    <string name="weather">Clima</string>
+    <string name="temp_c">Temperatura</string>
+    <string name="relative_humidity">Humedad</string>
+    <string name="dewpoint_c">Mínima</string>
+    <string name="heat_index_c">Máxima</string>
+    <string name="feelslike_c">Sensación térmica</string>
 
 </resources>
