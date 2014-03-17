@@ -15,6 +15,6 @@ public abstract class BaseActivity extends Activity {
 	protected abstract void initView();
 	
 	protected String TAG() {
-		return getClass().getName();
+		return getClass().getSimpleName();
 	}
 }

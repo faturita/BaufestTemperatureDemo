@@ -102,5 +102,7 @@ public class DetailActivity extends BaseActivity {
 		dewpoint_c.setText(String.valueOf(currentObservation.getDewpoint_c()));
 		heat_index_c.setText(currentObservation.getHeat_index_c());
 		feelslike_c.setText(currentObservation.getFeelslike_c());
+		
+		getActionBar().setTitle(observationLocation.getCity());
 	}
 }
