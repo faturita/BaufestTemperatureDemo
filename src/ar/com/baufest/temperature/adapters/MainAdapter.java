@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +16,8 @@ import ar.com.baufest.temperature.activities.MainActivity;
 import ar.com.baufest.temperature.entities.MainItem;
 
 public class MainAdapter extends ArrayAdapter<MainItem> {
+	private final String TAG = getClass().getName();
+	
 	Context context = null;
 	MainActivity activity = null;
 	List<MainItem> data = null;
@@ -30,9 +33,11 @@ public class MainAdapter extends ArrayAdapter<MainItem> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
+		Log.i(TAG, "getView() for position " + position);
+		
 		MainItem listItem = data.get(position);
-
+		Log.i(TAG, "listItem : " + listItem.toString());
+		
 		MainHolder mainHolder = null;
 		View mainRow = convertView;
 
@@ -86,7 +91,7 @@ public class MainAdapter extends ArrayAdapter<MainItem> {
 				adapter._selectedIndex = index;
 				notifyDataSetChanged();
 
-				activity.btnDashboardClick(item);
+				activity.btnClick(item);
 			}
 		}
 	}

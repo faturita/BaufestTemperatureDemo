@@ -14,6 +14,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 import ar.com.baufest.temperature.R;
@@ -31,30 +32,35 @@ public class MainActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		handleControls();
 		initView();
 	}
 
 	@Override
 	protected final void handleControls() {
+		Log.i(TAG(), "handleControls()");
 		progressBar = new ProgressDialog(this);
 		progressBar.setTitle(getString(R.string.title_activity_main_spinner));
-		
+
 		lstMainItems = (ListView) findViewById(R.id.lstMainItems);
 	}
 
 	@Override
 	protected final void initView() {
+		Log.i(TAG(), "initView()");
 		new ConditionsService().execute();
 	}
 
 	private void populateTemperatureList() {
-		final MainAdapter adapter = new MainAdapter(this, getModel().getMainItems(), this);
-		lstMainItems.setAdapter(adapter);		
+		Log.i(TAG(), "populateTemperatureList()");
+		final MainAdapter adapter = new MainAdapter(this, getModel()
+				.getMainItems(), this);
+		lstMainItems.setAdapter(adapter);
 	}
 
-	public void btnDashboardClick(MainItem item) {
+	public void btnClick(MainItem item) {
+		Log.i(TAG(), "Item clicked: " + item.toString());
 		getModel().setCurrentMainItem(item);
 		startActivity(new Intent(this, DetailActivity.class));
 	}
@@ -69,30 +75,39 @@ public class MainActivity extends BaseActivity {
 
 		@Override
 		protected String doInBackground(String... params) {
+			Log.i(TAG(), "doInBackground()");
+
 			final Gson gson = new Gson();
 			String jsonResponse = null;
 			String result = OK;
 			final List<MainItem> responses = new ArrayList<MainItem>();
 
 			for (final String city : CITIES) {
-				try {
-					jsonResponse = callRestfulWebService(String.format(
-							CONDITIONS_URL, city));
+				final String url = String.format(CONDITIONS_URL, city);
+				Log.i(TAG(), "calling get to url: " + url);
+				jsonResponse = callRestfulWebService(url);
+				Log.i(TAG(), "jsonResponse for " + city + " = "
+						+ jsonResponse);
+				if (!jsonResponse.equals(ERROR)) {
 					final GeneralResponse generalResponse = gson.fromJson(
 							jsonResponse, GeneralResponse.class);
+					Log.i(TAG(), "generalResponse: " + generalResponse.toString());
 					responses.add(new MainItem(generalResponse));
-				} catch (Exception e) {
-					result = ERROR;
-					e.printStackTrace();
+				}
+				else {
+					Log.e(TAG(), "Error in calling RestWebService, aborting");
+					break;
 				}
 			}
 			getModel().setMainItems(responses);
-			
+
+			Log.i(TAG(), "result = " + result);
 			return result;
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
+			Log.i(TAG(), "onPostExecute()");
 			progressBar.cancel();
 			if (result.equals(OK)) {
 				populateTemperatureList();

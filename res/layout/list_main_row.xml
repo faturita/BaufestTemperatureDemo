@@ -14,8 +14,7 @@
         android:layout_centerVertical="true"
         android:singleLine="true"
         android:textColor="@color/black"
-        android:textSize="20sp" 
-        android:text="Rosario, Argentina"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/temperatureRowMain"
@@ -25,8 +24,7 @@
         android:layout_marginRight="10dp"
         android:singleLine="true"
         android:textColor="@color/baufest_red"
-        android:textSize="26sp" 
-        android:text="31.7 °C" />
+        android:textSize="26sp"/>
 
     <TextView
         android:id="@+id/temperatureHighLow"
@@ -36,7 +34,6 @@
         android:layout_below="@+id/temperatureRowMain"
         android:singleLine="true"
         android:textColor="@color/baufest_red"
-        android:textSize="17sp" 
-        android:text="2 °C / NA °C" />
+        android:textSize="17sp" />
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package ar.com.baufest.temperature.activities;
 import static ar.com.baufest.temperature.application.BaufestTemperatureApplication.getModel;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -59,6 +60,8 @@ public class DetailActivity extends BaseActivity {
 
 	@Override
 	protected final void handleControls() {
+		Log.i(TAG(), "handleControls()");
+		
 		city = (TextView) findViewById(R.id.city);
 		state_name = (TextView) findViewById(R.id.state_name);
 		latitude = (TextView) findViewById(R.id.latitude);
@@ -74,11 +77,15 @@ public class DetailActivity extends BaseActivity {
 
 	@Override
 	protected final void initView() {
+		Log.i(TAG(), "initView()");
+		
 		final MainItem mainItem = getModel().getCurrentMainItem();
 		populate(mainItem);
 	}
 
 	private void populate(MainItem mainItem) {
+		Log.i(TAG(), "populate() for mainItem: " + mainItem.toString());
+		
 		final Current_observation currentObservation = mainItem
 				.getCurrentObservation();
 		final Observation_location observationLocation = currentObservation
